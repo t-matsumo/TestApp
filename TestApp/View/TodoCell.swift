@@ -9,10 +9,17 @@
 import UIKit
 
 class TodoCell: UITableViewCell {
-
+    @IBOutlet weak var containrt: UIView!
+    
     @IBOutlet weak var title: UILabel!
     
     func setup(todoData: TodoData) {
         self.title.text = todoData.title
+        
+        self.layoutIfNeeded()
+    }
+    
+    func height() -> CGFloat {
+        self.containrt.frame.height + 60
     }
 }

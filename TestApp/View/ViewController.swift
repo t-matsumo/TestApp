@@ -53,7 +53,20 @@ class ViewController: UIViewController, ViewContract, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rowData = self.sctionDataList.getRowDataAt(indexPath)
         let cell = self.tableView.dequeueReusableCell(withIdentifier: rowData.cellId, for: indexPath) as! TodoCell
+        
+        cell.frame.size = self.view.frame.size
         cell.setup(todoData: rowData.data as! TodoData)
+        
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let rowData = self.sctionDataList.getRowDataAt(indexPath)
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: rowData.cellId) as! TodoCell
+        
+        cell.frame.size = self.view.frame.size // 幅に合わせないとだめ
+        cell.setup(todoData: rowData.data as! TodoData)
+        return cell.height()
     }
 }
