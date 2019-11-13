@@ -15,11 +15,5 @@ class TodoCell: UITableViewCell {
     
     func setup(todoData: TodoData) {
         self.title.text = todoData.title
-        
-        self.layoutIfNeeded()
-    }
-    
-    func height() -> CGFloat {
-        self.containrt.frame.height + 60
     }
 }

@@ -54,9 +54,8 @@ class ViewController: UIViewController, ViewContract, UITableViewDataSource, UIT
         let rowData = self.sctionDataList.getRowDataAt(indexPath)
         let cell = self.tableView.dequeueReusableCell(withIdentifier: rowData.cellId, for: indexPath) as! TodoCell
         
-        cell.frame.size = self.view.frame.size
         cell.setup(todoData: rowData.data as! TodoData)
-        
+        NSLog("aaaa %lf %lf", cell.contentView.frame.size.width, cell.contentView.frame.size.height)
         return cell
     }
     
@@ -65,8 +64,10 @@ class ViewController: UIViewController, ViewContract, UITableViewDataSource, UIT
         let rowData = self.sctionDataList.getRowDataAt(indexPath)
         let cell = self.tableView.dequeueReusableCell(withIdentifier: rowData.cellId) as! TodoCell
         
-        cell.frame.size = self.view.frame.size // 幅に合わせないとだめ
         cell.setup(todoData: rowData.data as! TodoData)
-        return cell.height()
+//        cell.layoutIfNeeded() // △
+        cell.updateConstraintsIfNeeded() // o
+        NSLog("ccc %lf %lf", cell.systemLayoutSizeFitting(CGSize(width: self.tableView.frame.size.width, height: UIView.noIntrinsicMetric)).width, cell.systemLayoutSizeFitting(CGSize(width: self.tableView.frame.size.width, height: UIView.noIntrinsicMetric)).height)
+        return cell.systemLayoutSizeFitting(CGSize(width: self.tableView.frame.size.width, height: UIView.noIntrinsicMetric)).height
     }
 }
